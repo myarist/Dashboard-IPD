@@ -1,0 +1,19 @@
+---
+title: "wew"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+data <- read.csv("ipd.csv")
+
+data$"T" <- 0
+data$"B" <- 0
+data$"M" <- 0
+
+write.csv(data, "ipd.csv", row.names = F)
+```
+

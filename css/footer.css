@@ -1,0 +1,38 @@
+.footer {
+    position: fixed;
+    background: rgb(56, 55, 55);
+    color: rgb(197, 197, 197);
+    height: 20%;
+    line-height: 60px;
+    font-family: Verdana;
+    text-align: center;
+    bottom: 0;
+    transition: height 0.2s;
+    width: 100%;
+    z-index: 99;
+}
+
+.footer.animateFix {
+    height: 40px;
+    line-height: 40px;
+    border-top: solid 5px rgb(254, 168, 39);
+    box-shadow:
+        0 10px 80px rgba(0, 0, 0, 0.034),
+        0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+        0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+        0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+        0 12.5px 10px rgba(0, 0, 0, 0.06),
+        80px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.footer h1 {
+    font-size: 50px;
+    font-weight: lighter;
+    transition: all 0.3s;
+}
+
+.footer.animateFix h1 {
+    font-size: 20px;
+    transition: all 0.3s;
+    margin-top: 5px;
+}

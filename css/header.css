@@ -1,0 +1,84 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.header {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -120px;
+    position: fixed;
+    width: 100%;
+    background: rgb(56, 55, 55);
+    color: rgb(197, 197, 197);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 80%;
+    line-height: 100px;
+    transition: height 0.2s;
+    text-align: center;
+    z-index: 9999;
+    white-space: nowrap;
+    letter-spacing: 0.1em;
+}
+
+.header.animateFix {
+    height: 70px;
+    line-height: 70px;
+    border-bottom: solid 5px rgb(254, 168, 39);
+    box-shadow:
+        0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+        0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+        0 12.5px 10px rgba(0, 0, 0, 0.06),
+        0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+        0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+        0 10px 10px rgba(0, 0, 0, 0.12);
+}
+
+.header h1 {
+    font-size: 60px;
+    font-weight: bold;
+    transition: all 0.3s;
+    margin-top: 50px;
+}
+
+.header.animateFix h1 {
+    font-size: 30px;
+    transition: all 0.3s;
+    margin-top: 15px;
+}
+
+.header img {
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 0px;
+    width: 20%;
+    display: inline-block;
+}
+
+.header.animateFix img {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+    margin-top: -1000px;
+    width: 0%;
+    display: none;
+}
+
+@media screen and (max-width: 960px) {
+    .header h1 {
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .header h1 {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .header h1 {
+        font-size: 30px;
+    }
+}

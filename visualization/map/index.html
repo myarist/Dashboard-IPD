@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+  .background {
+    fill: none;
+    pointer-events: all;
+  }
+
+  #subunits .active {
+    fill: orange;
+  }
+
+  #state-borders {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 0.1px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    pointer-events: none;
+  }
+
+  #info {
+    padding-left: 1000px;
+  }
+
+  #info-location {
+    position: fixed;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: monospace;
+    margin-top: 80px;
+    margin-bottom: 20px;
+  }
+
+  #info-details {
+    position: fixed;
+    text-align: left;
+    margin-top: 160px;
+    font-size: 14px;
+    font-family: monospace;
+    z-index: 90;
+  }
+
+  #map {
+    position: absolute;
+    margin-top: 0px;
+    align-items: center;
+  }
+</style>
+
+<body>
+  <div id="info">
+    <div id="info-location">INDONESIA <br>Sebaran IPD</div>
+    <div id="info-details"></div>
+  </div>
+  <svg id='map'></svg>
+
+  <script src="http://d3js.org/d3.v4.min.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+  <script>
+    var width = 960,
+      height = 360,
+      centered;
+
+    var ipd = d3.map();
+    var t = d3.map();
+    var b = d3.map();
+    var m = d3.map();
+
+    var averageIPD = 0;
+
+    var color = d3.scaleThreshold()
+      .domain(d3.range(3, 8))
+      .range(["red", "rgb(255, 81, 0)", "rgb(255, 196, 0)", "rgb(217, 255, 0)", "rgb(0, 255, 0)", "green"]);
+
+    var projection = d3.geoEquirectangular()
+      .scale(1120)
+      .rotate([-120, -3])
+      .translate([width * 0.55, height / 4]);
+
+    var path = d3.geoPath()
+      .projection(projection);
+
+    var svg = d3.select("#map")
+      .attr("width", width)
+      .attr("height", height);
+
+    svg.append("rect")
+      .attr("class", "background")
+      .attr("width", width)
+      .attr("height", height)
+      .on("click", clicked);
+
+    var g = svg.append("g");
+
+    var x = d3.scaleLinear()
+      .domain([2, 8])
+      .rangeRound([120, 860]);
+
+    g.selectAll("rect")
+      .data(color.range().map(function (d) {
+        d = color.invertExtent(d);
+        if (d[0] == null) d[0] = x.domain()[0];
+        if (d[1] == null) d[1] = x.domain()[1];
+        return d;
+      }))
+      .enter().append("rect")
+      .attr("height", 5)
+      .attr("x", function (d) {
+        return x(d[0]);
+      })
+      .attr("width", function (d) {
+        return x(d[1]) - x(d[0]);
+      })
+      .attr("fill", function (d) {
+        return color(d[0]);
+      });
+
+    g.call(d3.axisBottom(x)
+        .tickSize(10)
+        .tickFormat(function (x, i) {
+          return x + "0";
+        })
+        .tickValues(color.domain()))
+      .select(".domain")
+      .remove();
+
+    d3.queue()
+      .defer(d3.json, "peta.json")
+      .defer(d3.csv, "ipd.csv", function (d) {
+        ipd.set(d.nama_kabkota, Number(d.ipd / 10));
+        t.set(d.nama_kabkota, d.T)
+        b.set(d.nama_kabkota, d.B)
+        m.set(d.nama_kabkota, d.M)
+      })
+      .await(ready);
+
+    function ready(error, data) {
+      if (error) throw error;
+
+      ipd.each(function (d) {
+        averageIPD += Number(d) * 10;
+      });
+
+      averageIPD = (averageIPD / ipd.size()).toPrecision(4);
+
+      document.getElementById('info-details').innerHTML = "Klik Salah Satu Daerah";
+
+      g.append("g")
+        .attr("id", "subunits")
+        .selectAll("path")
+        .data(topojson.feature(data, data.objects.IDN_adm_2_kabkota).features)
+        .enter().append("path")
+        .attr("fill", function (d) {
+          var key = d.properties.NAME_2;
+          key = (d.properties.VARNAME_2) ? d.properties.VARNAME_2 : key;
+          if (!ipd.get(key)) key = d.properties.NAME_2;
+          if (!ipd.get(key)) console.log(d.properties.VARNAME_2, key);
+
+          return color(d.ipd = ipd.get(key))
+        })
+        .attr("d", path)
+        .text(function (d) {
+          return d.ipd + "%";
+        })
+        .on("click", clicked);
+
+      g.append("path")
+        .datum(topojson.mesh(data, data.objects.IDN_adm_2_kabkota, function (a, b) {
+          return a !== b;
+        }))
+        .attr("id", "state-borders")
+        .attr("d", path);
+    };
+
+    function regionName(region) {
+      return region.properties.NAME_1.toUpperCase() + "<br>" + region.properties.NAME_2;
+    }
+
+    function getHDI(region) {
+      var key = region.properties.NAME_2;
+      if (ipd.get(key)) {
+        return "IPD \xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0: " + (ipd.get(key) * 10).toPrecision(4) + "<br>" + 
+               "Desa Tertinggal : " + t.get(key) + "<br>" +
+               "Desa Berkembang : " + b.get(key) + "<br>" +
+               "Desa Mandiri \xa0\xa0\xa0: " + m.get(key);
+      }
+
+      return "no data";
+    }
+
+    function clicked(d) {
+      var x, y, k;
+
+      if (d) {
+        console.log(d.properties);
+        document.getElementById('info-location').innerHTML = regionName(d);
+        document.getElementById('info-details').innerHTML =  getHDI(d);
+      } else {
+        document.getElementById('info-location').innerHTML = "INDONESIA" + "<br>" + "Sebaran IPD";
+        document.getElementById('info-details').innerHTML = "Klik Salah Satu Daerah";
+      }
+
+      if (d && centered !== d) {
+        var centroid = path.centroid(d);
+        x = centroid[0];
+        y = centroid[1];
+        k = 8;
+        centered = d;
+      } else {
+        x = width / 2;
+        y = height / 2;
+        k = 1;
+        centered = null;
+      }
+
+      g.selectAll("path")
+        .classed("active", centered && function (d) {
+          return d === centered;
+        });
+
+      g.selectAll("d")
+        .attr("fill", function (d) {
+          return color(d[0]);
+        });
+
+      g.transition()
+        .duration(1000)
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y +
+          ")")
+        .style("stroke-width", 2 / k + "px");
+    }
+  </script>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Proyek Akhir Visualisasi Data</title>
+        <link rel="icon" type="image/png" href="image/icon.png">
+
+        <link rel="stylesheet" type="text/css" href="css/header.css">
+        <link rel="stylesheet" type="text/css" href="css/sticky.css">
+        <link rel="stylesheet" type="text/css" href="css/isi.css">
+        <link rel="stylesheet" type="text/css" href="css/scroll.css">
+        <link rel="stylesheet" type="text/css" href="css/footer.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+
+        <script type="text/javascript" src="js/jquery-3.5.0.min.js"></script>
+        <script type="text/javascript" src="js/popper.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/header.js"></script>
+        <script type="text/javascript" async
+                src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+        <script type="text/x-mathjax-config">
+                MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+        </script>
+
+        <style>
+                .dropdown-menu {
+                        width: 100%;
+                }
+
+                .scrollable-menu {
+                        height: auto;
+                        max-height: 200px;
+                        overflow-x: hidden;
+                }
+        </style>
+</head>
+
+<body>
+
+        <div class="header">
+                <h1>Visualisasi Data Berdimensi Tinggi</h1>
+                <img src="image/stis.png" alt="Icon STIS">
+        </div>
+
+        <article id="focus">
+                <h1 class="title" id="top">Indeks Pembangunan Desa Tahun 2014</h1>
+                <p id="tulisan">Bappenas bekerja sama dengan BPS mengembangkan suatu sistem pengukuran untuk
+                        menggambarkan
+                        tingkat kemajuan desa pada suatu waktu, yaitu <b>Indeks Pembangunan Desa (IPD)</b>. Indeks
+                        pembangunan desa adalah indeks komposit yang disusun menggunakan beberapa dimensi,
+                        variabel, dan indikator kuantitatif. Pengukuran IPD dibangun dari data hasil Pendataan
+                        Potensi Desa (Podes) tahun 2014 yang dilaksanakan oleh Badan Pusat Statistik (BPS) dan
+                        digunakan sebagai rujukan indikator-indikator utama penyusun indeks.</p>
+                <p>Berdasarkan hasil sintesa data potensi desa 2014 dan UU Nomor 6 Tahun 2014 tentang Desa,
+                        IPD dibagi menjadi <b>5 Dimensi</b> yang disesuaikan dengan ketersediaan atau variabel
+                        dalam data Potensi Desa yaitu: <br>
+                        - Pelayanan Dasar, <br>
+                        - Kondisi Infrastruktur, <br>
+                        - Aksesibilitas/Transportasi, <br>
+                        - Pelayanan Umum, dan <br>
+                        - Penyelenggaraan Pemerintahan. <br>
+                </p>
+                <p>Masing-masing dimensi tersebut mencakup <b>12 Variabel</b> dan <b>42 Indikator</b>.</p>
+        </article>
+
+        <article>
+                <h1 class="title">Tabel Indikator, Variabel, dan Dimensi Penyusun IPD</h1>
+                <iframe id="tabel" scrolling="no" src="table/klasifikasi" height="500px" width="1300px"></iframe>
+        </article>
+        
+        <article>
+                <h1 class="title">Rumus Penghitungan IPD</h1>
+                <p id="tulisan">Nilai IPD diperoleh dari <b>penjumlahan</b> secara <b>tertimbang</b> terhadap
+                        setiap <b>indikator penyusun</b> IPD.
+                        Nilai yang dijumlahkan adalah skor setiap indikator yang sudah ditimbang/dikalikan dengan
+                        penimbang masing-masing indikator. Penghitungan IPD diformulasikan sebagai berikut:</p>
+                <p id="rumus">$IPD=\frac{(b_1\times V_1)\ \ +\ \ (b_2\times V_2)\ \ +\ \ (b_3\times V_3)\ \ +\ \
+                        \cdots\ \ +\ \ (b_{42}\times V_{42})}{b_1\ \ +\ \ b_2\ \ +\ \ b_3\ \ +\ \ \cdots\ \ +b_{42}}$
+                </p>
+                <h2 id="ket">Keterangan</h2>
+                <p class="colon"><span>$IPD$</span>: Nilai IPD setiap desa (bernilai 0-100)</p>
+                <p class="colon"><span>$b_i$</span>: Penimbang atau pembobot indikator ke-i</p>
+                <p class="colons"><span>$V_i$</span>: Skor indikator ke-i</p>
+        </article>
+
+        <article>
+                <h1 class="title">Klasifikasi Desa Menurut IPD</h1>
+                <p id="tulisan">Atas dasar amanat <b>UU Nomor 6 Tahun 2014</b> tentang Desa, Desa diklasifikasikan
+                        berdasarkan IPD menjadi <b>3 kategori</b>, yaitu:</p>
+                <h2 id="JudulList">Desa Tertinggal <span>$(IPD \leq 50)$</span></h2>
+                <p>Desa mempunyai ketersediaan dan akses terhadap pelayanan dasar, infrastruktur,
+                        aksesibilitas/transportasi, pelayanan, dan penyelenggaraan pemerintahan yang minim.</p>
+                <h2 id="JudulList">Desa Berkembang <span>$(50 < IPD \leq 75)$</span> </h2> <p>Desa Berkembang yaitu desa
+                                        mempunyai ketersediaan dan akses terhadap pelayanan dasar, infrastruktur,
+                                        aksesibilitas/transportasi, pelayanan, dan penyelenggaraan pemerintahan yang
+                                        cukup memadai.</p>
+                                        <h2 id="JudulList">Desa Mandiri <span>$(75 < IPD)$</span> </IPD> </h2> <p>Desa
+                                                                Mandiri yaitu desa
+                                                                mempunyai ketersediaan dan akses terhadap pelayanan
+                                                                dasar yang mencukupi,
+                                                                infrastruktur yang memadai, aksesibilitas/transportasi
+                                                                yang tidak sulit, pelayanan umum
+                                                                yang bagus, dan penyelenggaraan pemerintahan yang sudah
+                                                                sangat baik.</p>
+        </article>
+
+        <article>
+                <h1 class="title">Publikasi BPS</h1>
+                <p class="tautan"><span></span>Lebih lanjut tentang IPD 2014 dibahas dalam Publikasi BPS pada tautan
+                        berikut:
+                </p>
+                <a class="face-button" target="_blank"
+                        href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwj33PD2zeroAhWRX3wKHazvA3cQFjAAegQIAhAB&url=https%3A%2F%2Fwww.bappenas.go.id%2Ffiles%2F5514%2F4704%2F6044%2FBuku_Indeks_Pembangunan_Desa_2014.pdf&usg=AOvVaw2DgmTAtrV1D0Xr_MR_2yJA">
+
+                        <div class="face-primary">
+                                Unduh
+                        </div>
+
+                        <div class="face-secondary">
+                                Ukuran: 3,82 MB
+                        </div>
+                </a>
+
+                <img id="buku1" src="image/buku1.jpg" alt="Buku IPD 2014">
+                <img id="buku2" src="image/buku2.jpg" alt="Buku IPD 2014">
+        </article>
+
+        <article>
+                <h1 class="title">Tabel Data IPD Tahun 2014</h1>
+                <iframe id="tabel" scrolling="yes" src="table/cari" height="500px" width="1300px"></iframe>
+        </article>
+
+        <article class="bottom">
+
+                <div class="btn-group" id="title">
+                        <button type="button" id="satu" class="btn btn-primary"
+                                onClick="document.getElementById('iframe').src='visualization/parallel/parallel indo.html'">Parallel</button>
+                        <ul id="drop" class="dropdown-menu scrollable-menu" role="menu">
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel aceh.html'">Aceh</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel bali.html'">Bali</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel bangka belitung.html'">Bangka
+                                                Belitung</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel banten.html'">Banten</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel bengkulu.html'">Bengkulu</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel gorontalo.html'">Gorontalo</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel jambi.html'">Jambi</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel jawa barat.html'">Jawa
+                                                Barat</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel jawa tengah.html'">Jawa
+                                                Tengah</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel jawa timur.html'">Jawa
+                                                Timur</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel kalimantan barat.html'">Kalimantan
+                                                Barat</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel kalimantan selatan.html'">Kalimantan
+                                                Selatan</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel kalimantan tengah.html'">Kalimantan
+                                                Tengah</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel kalimantan timur.html'">Kalimantan
+                                                Timur</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel kalimantan utara.html'">Kalimantan
+                                                Utara</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel kepulauan riau.html'">Kepulauan
+                                                Riau</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel lampung.html'">Lampung</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel maluku.html'">Maluku</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel maluku utara.html'">Maluku
+                                                Utara</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel nusa tenggara barat.html'">Nusa
+                                                Tenggara Barat</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel nusa tenggara timur.html'">Nusa
+                                                Tenggara Timur</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel papua.html'">Papua</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel papua barat.html'">Papua
+                                                Barat</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel riau.html'">Riau</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel sulawesi barat.html'">Sulawesi
+                                                Barat</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel sulawesi selatan.html'">Sulawesi
+                                                Selatan</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel sulawesi tengah.html'">Sulawesi
+                                                Tengah</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel sulawesi tenggara.html'">Sulawesi
+                                                Tenggara</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel sulawesi utara.html'">Sulawesi
+                                                Utara</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel sumatera barat.html'">Sumatera
+                                                Barat</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel sumatera selatan.html'">Sumatera
+                                                Selatan</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel sumatera utara.html'">Sumatera
+                                                Utara</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/parallel/parallel yogyakarta.html'">Yogyakarta</a>
+                                </li>
+                        </ul>
+                </div>
+
+                <div class="btn-group" id="title">
+                        <button type="button" id="dua" class="btn btn-primary"
+                                onClick="document.getElementById('iframe').src='visualization/map'">Maps</button>
+                </div>
+
+                <div class="btn-group" id="title">
+                        <button type="button" id="tiga" class="btn btn-primary"
+                                onClick="document.getElementById('iframe').src='visualization/star/star indo.html'">Starplot<span
+                                        class="caret"></span></button>
+                        <ul id="drop" class="dropdown-menu scrollable-menu">
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star aceh.html'">Aceh</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star bali.html'">Bali</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star bangka belitung.html'">Bangka
+                                                Belitung</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star banten.html'">Banten</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star bengkulu.html'">Bengkulu</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star gorontalo.html'">Gorontalo</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star jambi.html'">Jambi</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star jawa barat.html'">Jawa
+                                                Barat</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star jawa tengah.html'">Jawa
+                                                Tengah</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star jawa timur.html'">Jawa
+                                                Timur</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star kalimantan barat.html'">Kalimantan
+                                                Barat</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star kalimantan selatan.html'">Kalimantan
+                                                Selatan</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star kalimantan tengah.html'">Kalimantan
+                                                Tengah</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star kalimantan timur.html'">Kalimantan
+                                                Timur</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star kalimantan utara.html'">Kalimantan
+                                                Utara</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star kepulauan riau.html'">Kepulauan
+                                                Riau</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star lampung.html'">Lampung</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star maluku.html'">Maluku</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star maluku utara.html'">Maluku
+                                                Utara</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star nusa tenggara barat.html'">Nusa
+                                                Tenggara Barat</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star nusa tenggara timur.html'">Nusa
+                                                Tenggara Timur</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star papua.html'">Papua</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star papua barat.html'">Papua
+                                                Barat</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star riau.html'">Riau</a>
+                                </li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star sulawesi barat.html'">Sulawesi
+                                                Barat</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star sulawesi selatan.html'">Sulawesi
+                                                Selatan</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star sulawesi tengah.html'">Sulawesi
+                                                Tengah</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star sulawesi tenggara.html'">Sulawesi
+                                                Tenggara</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star sulawesi utara.html'">Sulawesi
+                                                Utara</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star sumatera barat.html'">Sumatera
+                                                Barat</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star sumatera selatan.html'">Sumatera
+                                                Selatan</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star sumatera utara.html'">Sumatera
+                                                Utara</a></li>
+                                <li><a onclick="document.getElementById('iframe').src='visualization/star/star yogyakarta.html'">Yogyakarta</a>
+                                </li>
+                        </ul>
+
+                </div> 
+                <iframe id="iframe" scrolling="yes" src="visualization/map" height="400px" width="1320px"></iframe>
+        </article>
+
+        <div class="footer">
+                <h1>Kelompok 4</h1>
+        </div>
+
+</body>
+
+</html>

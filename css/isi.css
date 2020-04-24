@@ -1,0 +1,249 @@
+p,
+h2 {
+    padding: 5px 20px;
+    margin: 0;
+    padding-bottom: 20px;
+    font-size: 17px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: justify;
+}
+
+#tulisan {
+    padding: 20px 20px;
+}
+
+#rumus {
+    margin: 5px auto;
+    font-size: 25px;
+}
+
+#ket {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+p.colon>span,
+p.colons>span {
+    display: inline-block;
+    min-width: 90px;
+}
+
+.colon {
+    padding: 0px 20px 20px 20px;
+    margin: 0;
+}
+
+.colons {
+    margin: 0;
+    padding-bottom: 30px;
+}
+
+.custom-counter {
+    counter-reset: section;
+}
+
+.custom-counter li::before {
+    counter-increment: step-counter;
+    content: counter(step-counter);
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+#JudulList {
+    padding-bottom: 0;
+    margin: 0;
+    font-size: 20px;
+}
+
+#buku1 {
+    width: 20%;
+    margin: -290px auto 20px 20px;
+    border-radius: 5px;
+    box-shadow:
+        0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+        0 6.7px 20px rgba(0, 0, 0, 0.048),
+        0 12.5px 10px rgba(0, 0, 0, 0.06),
+        0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+        0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+        0 5px 10px rgba(0, 0, 0, 0.12);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+#buku1:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+#buku2 {
+    width: 20%;
+    margin: -290px auto 20px 750px;
+    border-radius: 5px;
+    box-shadow:
+        0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+        0 6.7px 20px rgba(0, 0, 0, 0.048),
+        0 12.5px 10px rgba(0, 0, 0, 0.06),
+        0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+        0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+        0 5px 10px rgba(0, 0, 0, 0.12);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+#buku2:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+p.tautan>span {
+    display: inline-block;
+    min-width: 350px;
+    padding-top: 150px;
+}
+
+@media screen and (max-width: 960px) {
+    #rumus {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    #rumus {
+        font-size: 10px;
+    }
+}
+
+@import url('//fonts.googleapis.com/css?family=Roboto:500');
+@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
+
+.face-button {
+    height: 64px;
+    display: block;
+    border: 3px solid rgb(27, 255, 65);
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    color: rgb(27, 255, 65);
+    overflow: hidden;
+    width: 240px;
+    left: auto;
+    right: auto;
+    border-radius: 5px;
+    margin: 30px auto;
+}
+
+.face-primary,
+.face-secondary {
+    padding: 0 32px;
+    line-height: 64px;
+    transition: .4s;
+    font-weight: bold;
+}
+
+.face-primary {
+    background-color: rgb(27, 255, 65);
+    color: #fff;
+}
+
+:hover .face-primary {
+    margin-top: -64px;
+}
+
+iframe {
+    border: none;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    max-height: 400px;
+}
+
+.btn-group {
+    width: 33.11111%;
+    margin-bottom: 25px;
+    height: 60px;
+    background-color: rgb(3, 139, 250);
+}
+
+.btn-group #satu {
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top-left-radius: 5px;
+    font-family: verdana;
+    color: rgb(254, 168, 39);
+    font-size: 25px;
+    width: 25%;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.btn-group #dua {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    font-family: verdana;
+    color: rgb(254, 168, 39);
+    font-size: 25px;
+    width: 25%;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.btn-group #tiga {
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 5px;
+    font-family: verdana;
+    color: rgb(254, 168, 39);
+    font-size: 25px;
+    width: 25%;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+.dropdown-menu {
+    max-height: 200px;
+}
+
+li {
+    cursor: pointer;
+    margin: 0;
+}
+
+#drop {
+    width: 100%;
+    text-align: center;
+    background-color: rgb(5, 113, 226, 0.95);
+    color: rgb(254, 168, 39);
+    font-size: 20px;
+    z-index: 5;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    transition: 0.4s;
+}
+
+#drop li:hover {
+    background-color: rgba(5, 94, 189, 0.336);
+}
+
+#tabel {
+    margin-top: 20px;
+}
+
+.btn-group:hover>.dropdown-menu {
+    display: block;
+    transition: all 0.5s;
+}
+
+.btn-group>.dropdown-toggle:active {
+    /*Without this, clicking will make it sticky*/
+    pointer-events: none;
+}
