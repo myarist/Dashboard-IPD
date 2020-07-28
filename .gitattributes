@@ -1,5 +1,0 @@
-static/* linguist-vendored
-docs/* linguist-documentation
-*.js linguist-language=true
-*.html linguist-language=false
-*.css linguist-language=false
