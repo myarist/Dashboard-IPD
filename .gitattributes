@@ -1,2 +1,2 @@
-visualization/* linguist-documentation
-css/* linguist-documentation
+visualization/* linguist-documentation=false
+css/* linguist-documentation=false
