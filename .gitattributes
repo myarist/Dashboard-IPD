@@ -1,1 +1,2 @@
-project-docs/* linguist-documentation
+*.html linguist-vendored
+*.css linguist-vendored
